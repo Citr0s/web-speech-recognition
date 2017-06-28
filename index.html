@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .result {
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-hello
+<div class="result">Say something...</div>
 <script>
     var recognition = new webkitSpeechRecognition();
     recognition.continuous = false;
@@ -14,7 +20,7 @@ hello
 
     recognition.onresult = function (event) {
         if (event.results[0][0].confidence > 0.50)
-            console.log(event.results[0][0].confidence, event.results[0][0].transcript);
+            document.querySelector('.result').innerHTML = 'I\'m ' + event.results[0][0].confidence + ' sure that you said \'' + event.results[0][0].transcript + '\'.';
     };
     recognition.onerror = function (error) {
         console.log(error);
